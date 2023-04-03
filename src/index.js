@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import LoginPage from "./login"
+import RegisterPage from "./register";
 
 
 function getCookie(name) {
@@ -27,13 +28,11 @@ function App () {
         // isLoggedIn === "Admin" ? <AdminDashboard /> : null
       }
       {
-        // isLoggedIn === "register" ? <RegisterPage setLogin={setLoggedIn} /> : null
+        isLoggedIn === "register" ? <RegisterPage setLogin={setLoggedIn} /> : null
       }
       {
         isLoggedIn === undefined ? <LoginPage setLogin={setLoggedIn}/> : null
       }
-
-
     </>
   )
 }
