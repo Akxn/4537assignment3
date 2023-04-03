@@ -1,17 +1,47 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import LoginPage from "./login"
+
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function App () {
+  const [isLoggedIn, setLoggedIn] = useState(undefined)
+
+  useEffect(() => {
+    const userType = getCookie("userType")
+    setLoggedIn(userType)
+  }, [])
+
+  return (
+    <>
+      {
+        // isLoggedIn === "User" ? <SearchPage /> : null
+      }
+      {
+        // isLoggedIn === "Admin" ? <AdminDashboard /> : null
+      }
+      {
+        // isLoggedIn === "register" ? <RegisterPage setLogin={setLoggedIn} /> : null
+      }
+      {
+        isLoggedIn === undefined ? <LoginPage setLogin={setLoggedIn}/> : null
+      }
+
+
+    </>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+  <App />
+</>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
