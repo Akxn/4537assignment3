@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import './login.css'
 
 const login = async (username, password) => {
     const BASE_AUTH_API_URL = "http://localhost:3000/"
@@ -27,6 +28,7 @@ function LoginPage({setLogin}) {
 
     return (
         <>
+        <div class ="login-form">
             <label style={{display: "block"}}>
                 Username:
                 <input type="text" name="username" onChange={(e) => {setUsername(e.target.value.trim().toLowerCase())}}/>
@@ -38,6 +40,7 @@ function LoginPage({setLogin}) {
             <button type="button" value="Submit" onClick={onSubmit}>Submit</button>
             <button type="button" value="Register" onClick={() => {setLogin("register")}}>Register</button>
             {showErr && <p>Please try again</p>}
+            </div>
         </>
     )
 }
