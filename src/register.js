@@ -30,15 +30,15 @@ function RegisterPage ({setLogin}) {
     return (
         <>
         <div class ="login-form">
-            <label style={{display: "block"}}>
+            <label>
                 Username:
                 <input type="text" name="username" onChange={(e) => {setUsername(e.target.value.trim().toLowerCase())}}/>
             </label>
-            <label style={{display: "block"}}>
+            <label>
                 Password:
                 <input type="password" name="password" onChange={(e) => {setPassword(e.target.value.trim().toLowerCase())}}/>
             </label>
-            <label style={{display: "block"}}>
+            <label>
                 Email:
                 <input type="text" name="email" onChange={(e) => {setEmail(e.target.value.trim().toLowerCase())}}/>
             </label>
@@ -47,7 +47,7 @@ function RegisterPage ({setLogin}) {
 
             <button type="button" value="Submit" onClick={onSubmit}>Register</button>
             <button type="button" value="Login" onClick={() => {setLogin(undefined)}}>Login</button>
-            {showErr && <p>Something went wrong! Please try again</p>}
+            {showErr && <span>Oh NO! Please try again</span>}
             </div>
         </>
     )

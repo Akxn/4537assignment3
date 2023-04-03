@@ -29,17 +29,17 @@ function LoginPage({setLogin}) {
     return (
         <>
         <div class ="login-form">
-            <label style={{display: "block"}}>
+            <label>
                 Username:
                 <input type="text" name="username" onChange={(e) => {setUsername(e.target.value.trim().toLowerCase())}}/>
             </label>
-            <label style={{display: "block"}}>
+            <label>
                 Password:
                 <input type="password" name="password" onChange={(e) => {setPassword(e.target.value.trim().toLowerCase())}}/>
             </label>
             <button type="button" value="Submit" onClick={onSubmit}>Submit</button>
             <button type="button" value="Register" onClick={() => {setLogin("register")}}>Register</button>
-            {showErr && <p>Please try again</p>}
+            {showErr && <span>Oh No!!Please try again</span>}
             </div>
         </>
     )
