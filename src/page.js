@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Pokemon from './Pokemon'
-import "./style.css"
+import './index.css';
 
 function page({ currentPokemons, setCurrentId, currentId }) {
 
