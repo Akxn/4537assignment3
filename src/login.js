@@ -17,10 +17,10 @@ function LoginPage({setLogin}) {
 
     const onSubmit = async () => {
         try {
-            const loginRes = await login(username, password)
-            setLogin(loginRes.data.userType)
-            document.cookie = `userType=${loginRes.data.userType}`
-            document.cookie = `token=${loginRes.data.token}`
+            const loginResponse = await login(username, password)
+            setLogin(loginResponse.data.userType)
+            document.cookie = `userType=${loginResponse.data.userType}`
+            document.cookie = `token=${loginResponse.data.token}`
         } catch (err) { 
             setShowErr(true)
         }

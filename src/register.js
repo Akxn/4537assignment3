@@ -19,8 +19,8 @@ function RegisterPage ({setLogin}) {
 
     const onSubmit = async () => {
         try {
-            const registerRes = await register(username, password, email, isAdmin ? "Admin" : "User")
-            console.log('registerRes', registerRes)
+            const registerResponse = await register(username, password, email, isAdmin ? "Admin" : "User")
+            console.log('registerResponse', registerResponse)
             setLogin(undefined)
         } catch (err) { 
             setShowErr(true)

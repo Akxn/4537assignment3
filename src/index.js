@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import LoginPage from "./login"
 import RegisterPage from "./register";
+import SearchPage from "./search";
 
 
 function getCookie(name) {
@@ -22,7 +23,7 @@ function App () {
   return (
     <>
       {
-        // isLoggedIn === "User" ? <SearchPage /> : null
+        isLoggedIn === "User" ? <SearchPage /> : null
       }
       {
         // isLoggedIn === "Admin" ? <AdminDashboard /> : null
