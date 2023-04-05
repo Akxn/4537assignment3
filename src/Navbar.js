@@ -1,4 +1,4 @@
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route, Switch } from "react-router-dom";
 import Search from './search';
 
 function Navbar({ user, setUser, accessToken, refreshToken, setAccessToken, setRefreshToken }) {
@@ -10,12 +10,12 @@ function Navbar({ user, setUser, accessToken, refreshToken, setAccessToken, setR
                     <li>
                         <Link to="/search">SEARCH</Link>
                     </li>
-                    {user?.role === 'admin' ? 
-                    (
-                        <li>
-                            <Link to="/dashboard">DASHBOARD</Link>
-                        </li>
-                    ) : null}
+                    {user?.role === 'admin' ?
+                        (
+                            <li>
+                                <Link to="/dashboard">DASHBOARD</Link>
+                            </li>
+                        ) : null}
 
                 </ul>
                 {/* <Logout
@@ -27,24 +27,26 @@ function Navbar({ user, setUser, accessToken, refreshToken, setAccessToken, setR
                 /> */}
             </nav>
 
-            <Routes>
-                <Route path="/" element={<Search
-                    user={user}
-                    setUser={setUser}
-                    accessToken={accessToken}
-                    refreshToken={refreshToken}
-                    setAccessToken={setAccessToken}
-                    setRefreshToken={setRefreshToken}
-                />} />
-                <Route path="/search" element={<Search
-                    user={user}
-                    setUser={setUser}
-                    accessToken={accessToken}
-                    refreshToken={refreshToken}
-                    setAccessToken={setAccessToken}
-                    setRefreshToken={setRefreshToken}
-                />} />
-            </Routes>
+            <Switch>
+                <Routes>
+                    <Route path="/" element={<Search
+                        user={user}
+                        setUser={setUser}
+                        accessToken={accessToken}
+                        refreshToken={refreshToken}
+                        setAccessToken={setAccessToken}
+                        setRefreshToken={setRefreshToken}
+                    />} />
+                    <Route path="/search" element={<Search
+                        user={user}
+                        setUser={setUser}
+                        accessToken={accessToken}
+                        refreshToken={refreshToken}
+                        setAccessToken={setAccessToken}
+                        setRefreshToken={setRefreshToken}
+                    />} />
+                </Routes>
+            </Switch>
         </>
     );
 }
