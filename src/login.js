@@ -1,45 +1,65 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import './login.css'
 
-const login = async (username, password) => {
-    const BASE_AUTH_API_URL = "http://localhost:3000/"
-    return await axios.post(`${BASE_AUTH_API_URL}login`, {
-        username, password
-    })
-}
 
-function LoginPage({setLogin}) {
+function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [user, setUser] = useState({});
+    // const [showErr, setShowErr] = useState(false)
+    const [accessToken, setAccessToken] = useState('');
+    const [refreshToken, setRefreshToken] = useState('');
 
-    const [showErr, setShowErr] = useState(false)
 
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const loginResponse = await login(username, password)
-            setLogin(loginResponse.data.userType)
-            document.cookie = `userType=${loginResponse.data.userType}`
-            document.cookie = `token=${loginResponse.data.token}`
-        } catch (err) { 
-            setShowErr(true)
+            const response = await axios.post("http://localhost:8008/login", { username, password });
+            setUser(response.data.user);
+            console.log(response.headers);
+            const auth = response.headers['authorization'];
+            const accessFilter = auth.split(' ')[1];
+            const refreshFilter = auth.split(' ')[3];
+            setAccessToken(accessFilter);
+            setRefreshToken(refreshFilter);
+        } catch (err) {
+            console.log(err);
         }
     }
 
     return (
         <>
-        <div class ="login-form">
-            <label>
-                Username:
-                <input type="text" name="username" onChange={(e) => {setUsername(e.target.value.trim().toLowerCase())}}/>
-            </label>
-            <label>
-                Password:
-                <input type="password" name="password" onChange={(e) => {setPassword(e.target.value.trim().toLowerCase())}}/>
-            </label>
-            <button type="button" value="Submit" onClick={onSubmit}>Submit</button>
-            <button type="button" value="Register" onClick={() => {setLogin("register")}}>Register</button>
-            {showErr && <span>Oh No!!Please try again</span>}
+            <div className='landing'>
+                {user?.role ? (
+                    <NavbarComponent
+                        user={user}
+                        setUser={setUser}
+                        accessToken={accessToken}
+                        refreshToken={refreshToken}
+                        setAccessToken={setAccessToken}
+                        setRefreshToken={setRefreshToken} />
+                ) : (
+                    <form onSubmit={onSubmit}>
+                        <h1 className='title'> POKEDEX </h1>
+                        <br />
+                        <input
+                            id="username-input"
+                            type="text"
+                            placeholder="username"
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <br />
+                        <input
+                            id="password-input"
+                            type="password"
+                            placeholder="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <br />
+                        <button id="login-button" type="submit">LOGIN</button>
+                    </form>
+                )}
             </div>
         </>
     )

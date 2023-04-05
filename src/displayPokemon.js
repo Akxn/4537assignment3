@@ -11,8 +11,6 @@ function display({ currentPokemons, currentId }) {
                             <div>
                                 ID: {item.id}<br/>
                                 English Name: {item.name.english}<br/>
-                                Janpanese Name: {item.name.japanese}<br/>
-                                Chinese Name: {item.name.chinese}<br/>
                                 Type: {item.type}<br/>
                                 HP: {item.base.HP}<br/>
                                 Attack: {item.base.Attack}<br/>
