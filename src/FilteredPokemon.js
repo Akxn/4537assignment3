@@ -17,12 +17,12 @@ function FilteredPokemons({ typeSelectedArray }) {
 
 
   return (
-    <div className="pokemon-list">
+    <div>
       {
         pokemons.map(pokemon => {
           if (typeSelectedArray.every(type => pokemon.type.includes(type))) {
             return (
-              <div key={pokemon.id}>
+              <div key={pokemon.id} className="pokemon-list">
                 {pokemon.name.english}
                 <ul>
                   {pokemon.type.map(type => <li key={type}>{type}</li>)}
@@ -33,8 +33,6 @@ function FilteredPokemons({ typeSelectedArray }) {
       }
     </div>
   )
-
 }
-
 
 export default FilteredPokemons

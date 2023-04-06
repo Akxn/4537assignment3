@@ -1,5 +1,3 @@
-const { mongoose } = require('mongoose')
-
 // function handleErr(err) {
 //   // console.log("err.name: ", err.name);
 //   if (err instanceof mongoose.Error.ValidationError) {
@@ -11,7 +9,7 @@ const { mongoose } = require('mongoose')
 //   }
 // }
 
-handleErr = (err, req, res, next) => {
+var handleErr = (err, req, res, next) => {
   if (err.pokeErrCode)
     res.status(err.pokeErrCode)
   else

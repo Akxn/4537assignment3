@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
-import Search from "./search.js"
-import FilteredPokemons from "./FilteredPokemon.js"
-import { Routes ,Route } from 'react-router-dom';
+import Login from './Login.js';
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from 'react-dom/client';
+import './style.css';
 
 function App() {
-  const [typeSelectedArray, setTypeSelectedArray] = useState([]);
-  return (
-    <>
-      <Search
-        setTypeSelectedArray={setTypeSelectedArray}
-        typeSelectedArray={typeSelectedArray}
-      />
-      <FilteredPokemons
-        typeSelectedArray={typeSelectedArray}
-      />
-
-    </>
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>,
   );
 }
 
