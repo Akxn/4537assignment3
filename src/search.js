@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import "./style.css"
 
 function Search({ setTypeSelectedArray, typeSelectedArray }) {
   const [types, setTypes] = useState([])

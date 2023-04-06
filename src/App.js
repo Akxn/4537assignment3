@@ -1,13 +1,12 @@
-import React from "react";
-import Login from "./Login"
+import React, { useState } from 'react';
 import Search from "./search.js"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import FilteredPokemons from "./FilteredPokemon.js"
+import { Routes ,Route } from 'react-router-dom';
 
 function App() {
+  const [typeSelectedArray, setTypeSelectedArray] = useState([]);
   return (
-    <Router>
-      <Switch>
-      <>
+    <>
       <Search
         setTypeSelectedArray={setTypeSelectedArray}
         typeSelectedArray={typeSelectedArray}
@@ -17,8 +16,6 @@ function App() {
       />
 
     </>
-      </Switch>
-    </Router>
   );
 }
 
