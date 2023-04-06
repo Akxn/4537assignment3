@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import './style.css'
 
 function FilteredPokemons({ typeSelectedArray }) {
 
@@ -16,7 +17,7 @@ function FilteredPokemons({ typeSelectedArray }) {
 
 
   return (
-    <div>
+    <div className="pokemon-list">
       {
         pokemons.map(pokemon => {
           if (typeSelectedArray.every(type => pokemon.type.includes(type))) {

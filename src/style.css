@@ -1,0 +1,55 @@
+/* Style for the container element of the pokemons list */
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Style for the individual pokemon card */
+  .pokemon-card {
+    background-color: #f0f0f0;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px #d0d0d0;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: calc(50% - 10px);
+  }
+  
+  /* Style for the pokemon name */
+  .pokemon-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the pokemon type list */
+  .pokemon-types {
+    margin-top: 10px;
+    padding-left: 0;
+  }
+  
+  /* Style for the individual pokemon type */
+  .pokemon-type {
+    display: inline-block;
+    background-color: #d0d0d0;
+    border-radius: 4px;
+    margin-right: 5px;
+    padding: 5px;
+  }
+  
+  /* Style for the container element of the type checkboxes */
+  .type-checkboxes {
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the individual type checkbox */
+  .type-checkbox {
+    margin-right: 10px;
+  }
+  
+  /* Style for the type checkbox label */
+  .type-label {
+    font-size: 16px;
+  }
+  

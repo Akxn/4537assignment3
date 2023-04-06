@@ -23,7 +23,7 @@ function Search({ setTypeSelectedArray, typeSelectedArray }) {
   }
 
   return (
-    <div>
+    <div className="type-checkboxes">
       {types.map((type) => (
         <div key={type}>
           <input
