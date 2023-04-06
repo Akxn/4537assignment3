@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "./Login"
-import Search from "./search"
+import Search from "./search.js"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
