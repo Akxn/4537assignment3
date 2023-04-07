@@ -20,7 +20,7 @@ function Login() {
             const refreshParsed = auth.split(' ')[3];
             setAccessToken(accessParsed);
             setRefreshToken(refreshParsed);
-            console.log("here"+auth)
+            console.log(res)
         } catch (err) {
             console.log(err);
         }

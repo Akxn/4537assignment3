@@ -111,45 +111,43 @@ app.post('/requestNewAccessToken', asyncWrapper(async (req, res) => {
     }
 
 }))
-
 app.post('/login', asyncWrapper(async (req, res) => {
-    const { username, password } = req.body
-    const user = await userModel.findOne({ username })
-    if (!user)
-        throw new PokemonAuthError("User not found")
+  const { username, password } = req.body
+  const user = await userModel.findOne({ username })
+  if (!user)
+      throw new PokemonAuthError("User not found")
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password)
-    if (!isPasswordCorrect)
-        throw new PokemonAuthError("Password is incorrect")
+  const isPasswordCorrect = await bcrypt.compare(password, user.password)
+  if (!isPasswordCorrect)
+      throw new PokemonAuthError("Password is incorrect")
 
-    const accessToken = jwt.sign({
-        user: {
-            username: user.username,
-            password: user.password,
-            role: user.role,
-        }
-    },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '10s' })
-    const refreshToken = jwt.sign({
-        user: {
-            username: user.username,
-            password: user.password,
-            role: user.role,
-        }
-    },
-        process.env.REFRESH_TOKEN_SECRET)
-    refreshTokens.push(refreshToken)
-    console.log(process.env)
+  const accessToken = jwt.sign({
+      user: {
+          username: user.username,
+          password: user.password,
+          role: user.role,
+      }
+  },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '10s' })
+  const refreshToken = jwt.sign({
+      user: {
+          username: user.username,
+          password: user.password,
+          role: user.role,
+      }
+  },
+      process.env.REFRESH_TOKEN_SECRET)
+  refreshTokens.push(refreshToken)
 
-    try {
-        const updated = await userModel.findOneAndUpdate({ username: user.username }, { token: accessToken, token_invalid: false }, { new: true })
+  try {
+      const updated = await userModel.findOneAndUpdate({ username: user.username }, { token: accessToken, token_invalid: false }, { new: true })
 
-        res.header('Authorization', `Bearer ${accessToken} Refresh ${refreshToken}`)
-        res.send({ 'user': updated, 'refreshTokens': refreshTokens })
-    } catch (error) {
-        throw new PokemonAuthError(error)
-    }
+      res.header('Authorization', `Bearer ${accessToken} Refresh ${refreshToken}`)
+      res.send({ 'user': updated, 'refreshTokens': refreshTokens })
+  } catch (error) {
+      throw new PokemonAuthError(error)
+  }
 }))
 
 
