@@ -140,6 +140,7 @@ app.post('/login', asyncWrapper(async (req, res) => {
     },
         process.env.REFRESH_TOKEN_SECRET)
     refreshTokens.push(refreshToken)
+    console.log(process.env)
 
     try {
         const updated = await userModel.findOneAndUpdate({ username: user.username }, { token: accessToken, token_invalid: false }, { new: true })
