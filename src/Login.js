@@ -22,7 +22,18 @@ function Login() {
             setRefreshToken(refreshParsed);
             console.log(res)
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                // The request was made, and the server responded with a status code outside the range of 2xx
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+            } else if (err.request) {
+                // The request was made, but no response was received
+                console.log(err.request);
+            } else {
+                // Something else happened in setting up the request that triggered an error
+                console.log('Error', err.message);
+            }
         }
     }
 

@@ -6,8 +6,7 @@ const { handleErr } = require("./errorHandler.js")
 const morgan = require("morgan")
 const cors = require("cors")
 const { asyncWrapper } = require("./asyncWrapper.js")
-const dotenv = require("dotenv")
-dotenv.config();
+require("dotenv").config();
 const userModel = require("./userModel.js")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
