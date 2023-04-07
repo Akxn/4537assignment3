@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import Navbar from './Navbar';
+import Dashboard from './Dashboard.js'
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -20,63 +20,41 @@ function Login() {
             const refreshParsed = auth.split(' ')[3];
             setAccessToken(accessParsed);
             setRefreshToken(refreshParsed);
-            console.log(res)
+            console.log("here"+auth)
         } catch (err) {
-            if (err.response) {
-                // The request was made, and the server responded with a status code outside the range of 2xx
-                console.log(err.response.data);
-                console.log(err.response.status);
-                console.log(err.response.headers);
-            } else if (err.request) {
-                // The request was made, but no response was received
-                console.log(err.request);
-            } else {
-                // Something else happened in setting up the request that triggered an error
-                console.log('Error', err.message);
-            }
+            console.log(err);
         }
     }
 
     return (
-        <div className='homepage'>
-            {(() => {
-                if (user?.role) {
-                    return (
-                        <>
-                        <Navbar
-                            user={user}
-                            setUser={setUser}
-                            accessToken={accessToken}
-                            refreshToken={refreshToken}
-                            setAccessToken={setAccessToken}
-                            setRefreshToken={setRefreshToken}/>
-                        </>
-                    );
-                } else {
-                    return (
-                        <form onSubmit={handleSubmit}>
-                            <h2 className='titleText'> The Ultimate PokeDex </h2>
-                            <br />
-                            <input
-                                id="username-input"
-                                type="text"
-                                placeholder="username"
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                            <br />
-                            <input
-                                id="password-input"
-                                type="password"
-                                placeholder="password"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <br />
-                            <button id="loginButton" type="submit">LOGIN</button>
-                        </form>
-                    );
-                }
-            })()}
-        </div>
+        <div>
+        {user?.username ? (
+          <>
+            <h1>Welcome {user.username}</h1>
+            <Dashboard accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />
+          </>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <span> Admin Login </span>
+            <br />
+            <input
+              type="text"
+              placeholder="username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <br />
+            <input
+              type="password"
+              placeholder="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <button type="submit">
+              Login
+            </button>
+          </form>
+        )}
+      </div>
     )
 }
 
