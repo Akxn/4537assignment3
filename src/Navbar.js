@@ -1,9 +1,23 @@
 import { Link, Routes, Route } from "react-router-dom";
+import { Suspense, useMemo } from "react";
 import SearchPage from './SearchPage';
 import Dashboard from './Dashboard';
 import Logout from './Logout';
 
-function Navbar({ user, setUser, accessToken, refreshToken, setAccessToken, setRefreshToken }) {
+function Navbar(props) {
+    const { user, setUser, accessToken, refreshToken, setAccessToken, setRefreshToken } = props;
+
+    const routeProps = useMemo(() => {
+        return {
+            user,
+            setUser,
+            accessToken,
+            refreshToken,
+            setAccessToken,
+            setRefreshToken
+        }
+    }, [user, setUser, accessToken, refreshToken, setAccessToken, setRefreshToken]);
+
     return (
         <>
             <nav>
@@ -12,48 +26,22 @@ function Navbar({ user, setUser, accessToken, refreshToken, setAccessToken, setR
                     <li>
                         <Link to="/search">SEARCH</Link>
                     </li>
-                    {user?.role === 'admin' ? 
-                    (
+                    {user?.role === 'admin' && (
                         <li>
                             <Link to="/dashboard">DASHBOARD</Link>
                         </li>
-                    ) : null}
-
+                    )}
                 </ul>
-                <Logout
-                    setUser={setUser}
-                    accessToken={accessToken}
-                    refreshToken={refreshToken}
-                    setAccessToken={setAccessToken}
-                    setRefreshToken={setRefreshToken}
-                />
+                <Logout {...props} />
             </nav>
 
-            <Routes>
-                <Route path="/" element={<SearchPage
-                    user={user}
-                    setUser={setUser}
-                    accessToken={accessToken}
-                    refreshToken={refreshToken}
-                    setAccessToken={setAccessToken}
-                    setRefreshToken={setRefreshToken}
-                />} />
-                <Route path="/search" element={<SearchPage
-                    user={user}
-                    setUser={setUser}
-                    accessToken={accessToken}
-                    refreshToken={refreshToken}
-                    setAccessToken={setAccessToken}
-                    setRefreshToken={setRefreshToken}
-                />} />
-                <Route path="/dashboard" element={<Dashboard
-                    user={user}
-                    setUser={setUser}
-                    accessToken={accessToken}
-                    refreshToken={refreshToken}
-                    setAccessToken={setAccessToken}
-                    setRefreshToken={setRefreshToken} />} />
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route path="/" element={<SearchPage {...routeProps} />} />
+                    <Route path="/search" element={<SearchPage {...routeProps} />} />
+                    <Route path="/dashboard" element={<Dashboard {...routeProps} />} />
+                </Routes>
+            </Suspense>
         </>
     );
 }

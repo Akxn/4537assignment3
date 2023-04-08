@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import jwt_decode from "jwt-decode";
 import customTable from './customTable';
+import customChart from './customChart';
 
 function Report({ id, accessToken, setAccessToken, refreshToken, setRefreshToken }) {
     const [reportTable, setReportTable] = useState('');
@@ -58,9 +59,9 @@ function Report({ id, accessToken, setAccessToken, refreshToken, setRefreshToken
     }, [id]);
 
     if(id == 1){
-        return (<UsersChart id={id} reportTable={reportTable} />)
+        return (<customChart id={id} reportTable={reportTable} />)
     }else if(id == 2){
-        return (<UsersChart id={id} reportTable ={reportTable} />)
+        return (<customChart id={id} reportTable ={reportTable} />)
     }else if(id == 3){
         return (<customTable id={id} header1="Endpoint" header2="User" header3="Count" reportTable ={reportTable} />)
     }else if(id == 4) {

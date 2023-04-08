@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ApiTable = ({ id, header1, header2, header3, reportTable }) => {
-    // console.log(reportTable)
+const CustomTable = ({ id, header1, header2, header3, reportTable }) => {
+    console.log(reportTable)
     const chartData = Object.values(reportTable);
     console.log(chartData);
     let rows = 1;
@@ -95,4 +95,4 @@ const ApiTable = ({ id, header1, header2, header3, reportTable }) => {
     }
 };
 
-export default ApiTable;
+export default CustomTable;
