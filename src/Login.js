@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import Dashboard from './Dashboard.js'
+import Navbar from './Navbar.js'
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -20,41 +20,52 @@ function Login() {
             const refreshParsed = auth.split(' ')[3];
             setAccessToken(accessParsed);
             setRefreshToken(refreshParsed);
-            console.log("here"+auth)
+            // console.log("here"+auth)
         } catch (err) {
             console.log(err);
         }
     }
 
     return (
-        <div>
-        {user?.username ? (
-          <>
-            <h1>Welcome {user.username}</h1>
-            <Dashboard accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />
-          </>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <span> Admin Login </span>
-            <br />
-            <input
-              type="text"
-              placeholder="username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <br />
-            <button type="submit">
-              Login
-            </button>
-          </form>
-        )}
-      </div>
+        <div className='landing'>
+            {(() => {
+                if (user?.role) {
+                    return (
+                        <>
+                        <Navbar
+                            user={user}
+                            setUser={setUser}
+                            accessToken={accessToken}
+                            refreshToken={refreshToken}
+                            setAccessToken={setAccessToken}
+                            setRefreshToken={setRefreshToken}/>
+                        </>
+                    );
+                } else {
+                    return (
+                        <form onSubmit={handleSubmit}>
+                            <h1 className='title'> POKEDEX </h1>
+                            <br />
+                            <input
+                                id="username-input"
+                                type="text"
+                                placeholder="username"
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                            <br />
+                            <input
+                                id="password-input"
+                                type="password"
+                                placeholder="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <br />
+                            <button id="login-button" type="submit">LOGIN</button>
+                        </form>
+                    );
+                }
+            })()}
+        </div>
     )
 }
 

@@ -47,6 +47,9 @@ const start = asyncWrapper(async () => {
         const doc = await userModel.findOne({ "username": "admin" })
         if (!doc)
             userModel.create({ username: "admin", password: bcrypt.hashSync("admin", 10), role: "admin", email: "admin@admin.ca" })
+        // const doc2 = await userModel.findOne({ "username": "user" })
+        // if (!doc2)
+            // userModel.create({ username: "user", password: bcrypt.hashSync("user", 10), role: "user", email: "user@user.ca" })
     })
 })
 start()
@@ -207,9 +210,8 @@ const authUser = asyncWrapper(async (req, res, next) => {
             throw new PokemonAuthError()
         }
         req.token = token;
-        next()
     } catch (err) {
-        throw new PokemonAuthError("Invalid Token Verification. Log in again.")
+        // throw new PokemonAuthError("Invalid Token Verification. Log in again.")
     }
 })
 
@@ -237,6 +239,7 @@ app.get('/api/v1/pokemons', asyncWrapper(async (req, res) => {
         .skip(req.query["after"])
         .limit(req.query["count"])
     res.json(docs)
+    // console.log(docs)
 }))
 
 app.get('/api/v1/pokemon', asyncWrapper(async (req, res) => {

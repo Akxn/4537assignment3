@@ -1,70 +1,358 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Flex:opsz,wght@8..144,200;8..144,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;700&family=Roboto&family=Roboto+Flex:opsz,wght@8..144,200;8..144,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-/* Style for the container element of the pokemons list */
+/* Cyberpunk Colors */
+:root {
+    --primary-color: #00ff7f;
+    --secondary-color: #ff4081;
+    --text-color: #e6e6e6;
+    --background-color: #121212;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body:not(.pokemon-list) {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
+  color: var(--text-color);
+}
+
+.title {
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+  font-size: 80px;
+  margin: 3rem 0;
+  color: var(--primary-color);
+}
+
+.title-h3 {
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+  font-size: 36px;
+  margin: 3rem 0;
+  color: var(--secondary-color);
+}
+
+
+/* Updated styles for cyberpunk theme */
+nav {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+nav h3 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 32px;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+.logout-button {
+    justify-self: end;
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 1rem;
+}
+
+.logout-button:hover {
+    background-color: var(--primary-color);
+}
+
+/* Update other elements with the new color scheme and fonts */
+
+/* ... */
+
 .pokemon-list {
+font-family: 'Press Start 2P', cursive;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    padding: 1rem;
+    align-items: center;
+    justify-items: center;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 255, 127, 0.2);
+   
+
+    transition: 0.3s;
+    margin: 1rem;
+}
+
+.pokemon-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-image {
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+}
+
+.pokemon-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  /* Style for the individual pokemon card */
-  .pokemon-card {
-    background-color: #d32a2a;
-    border: 1px solid #3f0c0c;
-    border-radius: 4px;
-    box-shadow: 2px 2px 2px #d0d0d0;
-    margin-bottom: 20px;
-    padding: 10px;
-    width: calc(50% - 10px);
-  }
-  
-  /* Style for the pokemon name */
-  .pokemon-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  /* Style for the pokemon type list */
-  .pokemon-types {
-    margin-top: 10px;
-    padding-left: 0;
-  }
-  
-  /* Style for the individual pokemon type */
-  .pokemon-type {
-    display: inline-block;
-    background-color: #d0d0d0;
-    border-radius: 4px;
-    margin-right: 5px;
-    padding: 5px;
-  }
-  
-  /* Style for the container element of the type checkboxes */
-  .type-checkboxes {
-    margin-bottom: 20px;
-  }
-  
-  /* Style for the individual type checkbox */
-  .type-checkbox {
-    margin-right: 10px;
-  }
-  
-  /* Style for the type checkbox label */
-  .type-label {
+    justify-content: center;
+    margin: 1rem calc((100vw - 95%)/4);
+}
+
+/* Pokemon Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
     font-size: 16px;
-  }
-  
+    font-weight: bold;
+    cursor: pointer;
+    color: #444;
+}
+
+.pokemon-image {
+    display: block;
+    margin: 20px auto;
+    width: 200px;
+    height: auto;
+}
+
+.pokemon-type {
+    display: flex;
+}
+
+.modal-overlay h2 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 1rem 0;
+    color: #3e3e3e;
+}
+
+.modal-overlay span {
+    font-size: 16px;
+    margin: 0.5rem 0.5rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.modal-overlay p {
+    font-size: 18px;
+    color: #555;
+    margin: 0;
+}
+
+.modal-overlay table {
+    width: 45%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.modal-overlay tbody {
+    padding: 0;
+    margin-top: 10px;
+}
+
+.modal-overlay td {
+    font-size: 16px;
+    color: #666;
+    padding: 0.3rem 0;
+}
+
+.stat {
+    font-weight: 700;
+    text-align: start;
+}
+
+/* Pokemon Types */
+
+.pokemon-type span {
+    font-weight: 200;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.Normal {
+    background-color: #A8A878;
+}
+
+.Fighting {
+    background-color: #C03028;
+}
+
+.Flying {
+    background-color: #A890F0;
+}
+
+.Poison {
+    background-color: #A040A0;
+}
+
+.Ground {
+    background-color: #E0C068;
+}
+
+.Rock {
+    background-color: #B8A038;
+}
+
+.Bug {
+    background-color: #A8B820;
+}
+
+.Ghost {
+    background-color: #705898;
+}
+
+.Steel {
+    background-color: #B8B8D0;
+}
+
+.Fire {
+    background-color: #F08030;
+}
+
+.Water {
+    background-color: #6890F0;
+}
+
+.Grass {
+    background-color: #78C850;
+}
+
+.Electric {
+    background-color: #F8D030;
+}
+
+.Psychic {
+    background-color: #F85888;
+}
+
+.Ice {
+    background-color: #98D8D8;
+}
+
+.Dragon {
+    background-color: #7038F8;
+}
+
+.Dark {
+    background-color: #705848;
+}
+
+.Fairy {
+    background-color: #EE99AC;
+}
+
+/* Dashboard Charts */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 3rem calc((100vw - 95%)/4);
+}
+.chart {
+    margin: 1rem;
+    padding: 1rem;
+    width: 30%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.chart:hover {
+    transform: translateY(-5px);
+}
+
+.chart h3 {
+    font-size: 22px;
+    font-style: bold;
+    margin: 1rem 0;
+    color: #3e3e3e;
+}
+
+/* Dashboard Table */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table-container {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-container th,
+.table-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: center;
+}
+
+.table-container th {
+    background-color: rgba(253, 203, 110, 0.4);
+    color: black;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #f2f2f2;
+} 
