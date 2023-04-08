@@ -86,11 +86,6 @@ function FilteredPokemons(
     setFilteredPokemons(filtered.slice(startIndex, endIndex));
     }, [searchQuery, pokemons, pageNumber, typeSelectedArray])
 
-    
-    const handlePokemonClick = (pokemon) => {
-        setSelectedPokemon(pokemon);
-        setShowModal(true);
-    };
 
     return (
         <div className='pokemon-grid'>
@@ -100,18 +95,13 @@ function FilteredPokemons(
                         var id = '00' + pokemon.id;
                         id = id.slice(-3);
 
-                        return <div key={pokemon.id} className="pokemon-list" onClick={() => handlePokemonClick(pokemon)}>
+                        return <div key={pokemon.id} className="pokemon-list">
                             <img key={id} className="pokemon-image" src={`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`} alt={pokemon.name.english} />
                             <span key={pokemon.name.english}>{pokemon.name.english}</span>
                             </div>
                     // }
                 })
             }
-            {/* <PokemonBox
-                showModal={showModal}
-                setShowModal={setShowModal}
-                pokemon={selectedPokemon}
-            /> */}
         </div>
     )
 }

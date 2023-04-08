@@ -10,9 +10,8 @@ require("dotenv").config();
 const userModel = require("./userModel.js")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const { getChart } = require("./getChart.js")
-// const apiLogger = require("./Util/apiLogger.js")
-// const { getChartData } = require("./Util/chartData.js")
+// const { getChart } = require("./getChart.js")
+
 
 const {
   PokemonBadRequest,
@@ -312,11 +311,11 @@ app.patch('/api/v1/pokemon/:id', asyncWrapper(async (req, res) => {
   }
 }))
 
-app.get('/report', asyncWrapper(async (req, res) => {
-    console.log(`requestedBy: ${req.query.id}`);
-    const data = await getChart(req.query.id);
-    res.json(data);
-}))
+// app.get('/report', asyncWrapper(async (req, res) => {
+//     console.log(`requestedBy: ${req.query.id}`);
+//     const data = await getChart(req.query.id);
+//     res.json(data);
+// }))
 
 app.use(handleErr)
 
