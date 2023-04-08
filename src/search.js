@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Search({
   setTypeSelectedArray,
-  typeSelectedArray,
+  typeSelectedArray = [],
   setSearchQuery,
   searchQuery = '',
 }) {
@@ -23,7 +23,7 @@ function Search({
     const { value, checked } = event.target;
 
     if (checked) {
-      setTypeSelectedArray((...typeSelectedArray) => [
+      setTypeSelectedArray((typeSelectedArray) => [
         ...typeSelectedArray,
         value,
       ]);

@@ -79,7 +79,7 @@ function FilteredPokemons(
 
     setCount(filtered.length);
 
-    const pokemonsPerPage = 12;
+    const pokemonsPerPage = 10;
     const startIndex = (pageNumber - 1) * pokemonsPerPage;
     const endIndex = startIndex + pokemonsPerPage;
 
