@@ -48,13 +48,12 @@ function FilteredPokemons(
     useEffect(() => {
         async function fetchPokemons() {
             try{
-                // console.log(accessToken);
+                console.log(accessToken);
                 const res = await axiosJWT.get('http://localhost:6010/api/v1/pokemons', {
                     headers: {
                         'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                     }
                 })
-                console.log(res.data);
                 if(res.data.length !== 0){
                     setPokemons(res.data)
                 }
@@ -63,14 +62,13 @@ function FilteredPokemons(
             }
         }
         fetchPokemons()
-    })
+    }, [])
 
 
     var filtered = pokemons;
     console.log(filtered);
 
     useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     filtered = pokemons.filter(pokemon =>
         pokemon.name.english.toLowerCase().includes(searchQuery)
     );
@@ -93,6 +91,7 @@ function FilteredPokemons(
         setSelectedPokemon(pokemon);
         setShowModal(true);
     };
+
     return (
         <div className='pokemon-grid'>
             {
@@ -100,7 +99,6 @@ function FilteredPokemons(
                     // if(typeSelectedArray.every(type => pokemon.type.includes(type))){
                         var id = '00' + pokemon.id;
                         id = id.slice(-3);
-                        console.log(`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`)
 
                         return <div key={pokemon.id} className="pokemon-list" onClick={() => handlePokemonClick(pokemon)}>
                             <img key={id} className="pokemon-image" src={`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`} alt={pokemon.name.english} />
