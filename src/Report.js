@@ -1,65 +1,75 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import jwt_decode from "jwt-decode";
+import customTable from './customTable';
 
+function Report({ id, accessToken, setAccessToken, refreshToken, setRefreshToken }) {
+    const [reportTable, setReportTable] = useState('');
+    const axiosJWT = axios.create()
 
-
-function Report({ id, accessToken, setAccessToken, refreshToken }) {
-  const [reportTable, setReportTable] = useState('');
-  useEffect(() => {
-    const start = async () => {
-      try {
-        const res = await axiosJWT.get(`http://localhost:6001/report?id=${id}`, {
-          headers: {
-            'auth-token-access': accessToken
-          }
-        })
-        setReportTable(res.data);
-      }
-      catch (err) {
-        console.log(err);
-      }
-    }
-    start();
-  }, [id]);
-
-  const refreshAccessToken = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/requestNewAccessToken", {}, {
-        headers: {
-          'auth-token-refresh': refreshToken
+    axiosJWT.interceptors.request.use(
+        async (config) => {
+            let currentDate = new Date();
+            const decodedToken = jwt_decode(accessToken);
+            if (decodedToken.exp * 1000 < currentDate.getTime()) {
+                const newAccessToken = await refreshAccessToken();
+                config.headers['Authorization'] = newAccessToken;
+            }
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
         }
-      });
-      // setAccessToken(res.headers['auth-token-access']);
-      return res.headers['auth-token-access']
-    } catch (err) {
-      console.log(err);
+    );
+
+    const refreshAccessToken = async () => {
+        try {
+            const res = await axios.post("http://localhost:6010/requestNewAccessToken", {}, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
+                }
+            });
+            console.log("refresh token requested");
+            const authHeader = res.headers["authorization"];
+            setAccessToken(authHeader.split(" ")[1]);
+            setRefreshToken(authHeader.split(" ")[3]);
+            return authHeader;
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        const start = async () => {
+            try {
+                console.log(accessToken);
+                const res = await axiosJWT.get(`http://localhost:6010/report?id=${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
+                    }
+                })
+                setReportTable(res.data);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+        start();
+    }, [id]);
+
+    if(id == 1){
+        return (<UsersChart id={id} reportTable={reportTable} />)
+    }else if(id == 2){
+        return (<UsersChart id={id} reportTable ={reportTable} />)
+    }else if(id == 3){
+        return (<customTable id={id} header1="Endpoint" header2="User" header3="Count" reportTable ={reportTable} />)
+    }else if(id == 4) {
+        return (<customTable id={id} header1="Endpoint" header2="Status" header3="Count" reportTable={reportTable} />)
+    }else if(id == 5){
+        return (<customTable id={id} header1="Date" header2="Method" header3="Status" reportTable={reportTable} />)
     }
-  };
 
-  const axiosJWT = axios.create()
 
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let currentDate = new Date();
-      const decodedToken = jwt_decode(accessToken);
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        const newAccessToken = await refreshAccessToken();
-        config.headers["auth-token-access"] = newAccessToken;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
-
-  return (
-    <>
-      <div>Report {id && id}</div>
-      <div> {reportTable && reportTable}</div>
-    </>
-  )
 }
 
 export default Report

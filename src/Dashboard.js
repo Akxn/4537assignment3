@@ -1,5 +1,6 @@
 import React from 'react'
 import Report from './Report';
+import { useNavigate } from "react-router-dom";
 
 import {
   Routes,
@@ -7,8 +8,17 @@ import {
   Link
 } from "react-router-dom";
 
-function Dashboard({ accessToken, setAccessToken, refreshToken }) {
+// // user={user}
+// setUser={setUser}
+// accessToken={accessToken}
+// refreshToken={refreshToken}
+// setAccessToken={setAccessToken}
+// // setRefreshToken={setRefreshToken}
+
+function Dashboard({ user, setUser, accessToken, setAccessToken, refreshToken, setRefreshToken }) {
   return (
+    <>{
+        user?.role === 'admin' ?(
     <div>
       <h1>
         Dashboard
@@ -27,7 +37,9 @@ function Dashboard({ accessToken, setAccessToken, refreshToken }) {
         <Route path="/report/3" element={<Report id={3} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />} />
       </Routes>
 
-    </div>
+    </div>)
+    : null}
+    </>
   )
 }
 

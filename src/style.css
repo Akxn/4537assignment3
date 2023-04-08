@@ -298,8 +298,7 @@ font-family: 'Press Start 2P', cursive;
     background-color: #EE99AC;
 }
 
-/* Dashboard Charts */
-.chart-container {
+/* Dashboard Charts *search-checkbox {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -328,16 +327,11 @@ font-family: 'Press Start 2P', cursive;
 /* Dashboard Table */
 .table-wrapper {
     overflow-x: auto;
-}
-
-.table-container {
+}search-checkbox {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
-}
-
-.table-container th,
-.table-container td {
+}search-checkbox thsearch-checkbox td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -346,13 +340,99 @@ font-family: 'Press Start 2P', cursive;
     white-space: nowrap;
     font-size: 12px;
     text-align: center;
-}
-
-.table-container th {
+}search-checkbox th {
     background-color: rgba(253, 203, 110, 0.4);
     color: black;
-}
-
-.table-container tr:nth-child(even) {
+}search-checkbox tr:nth-child(even) {
     background-color: #f2f2f2;
 } 
+
+/* Checkboxes */
+.search-checkbox {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.search-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.search-checkbox label {
+    position: relative;
+    margin-right: 1.5rem;
+    padding-left: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.search-checkbox label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.search-checkbox input[type="checkbox"]:checked + label::before {
+    background-color: var(--primary-color);
+}
+
+.search-checkbox label::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--text-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.search-checkbox input[type="checkbox"]:checked + label::after {
+    opacity: 1;
+}
+
+
+.pagination {
+  display: inline-block;
+  border-radius: 3px;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.pagination a {
+  color: #555;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination .prev, .pagination .next {
+  margin-right: 5px;
+}
+
+.pagination .next {
+  float: right;
+}
+
+@media screen and (max-width: 600px) {
+  .pagination a {float: none; display: block; text-align: center;}
+  .pagination .prev, .pagination .next {float: none; display: block; text-align: center;}
+}

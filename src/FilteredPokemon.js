@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import jwt_decode from "jwt-decode"
 import { useState } from 'react'
-import PokemonBox from './PokemonBox'
+// import PokemonBox from './PokemonBox'
 const axiosJWT = axios.create()
 
 function FilteredPokemons(
@@ -107,11 +107,11 @@ function FilteredPokemons(
                     // }
                 })
             }
-            <PokemonBox
+            {/* <PokemonBox
                 showModal={showModal}
                 setShowModal={setShowModal}
                 pokemon={selectedPokemon}
-            />
+            /> */}
         </div>
     )
 }
