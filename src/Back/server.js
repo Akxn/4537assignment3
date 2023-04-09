@@ -10,7 +10,6 @@ require("dotenv").config();
 const userModel = require("../userModel.js")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const logger = require("../src/logger.js")
 // const { getChart } = require("./getChart.js")
 
 const {
@@ -240,14 +239,6 @@ const authUser = asyncWrapper(async (req, res, next) => {
     req.token = token;
     next()
   } catch (err) {
-    logger.create({
-      method: method,
-      endpoint: url,
-      userip: ip,
-      userid: userid,
-      statusCode: 401,
-      
-  })
     throw new PokemonAuthError("Invalid Token Verification. Log in again.")
   }
 })
@@ -285,14 +276,6 @@ app.get('/api/v1/pokemon', asyncWrapper(async (req, res) => {
     res.json(docs);
   }
   else throw new PokemonNotFoundError("Pokemon not found")
-  logger.create({
-    method: method,
-    endpoint: url,
-    userip: ip,
-    userid: userid,
-    statusCode: 401,
-    
-})
 }))
 
 app.use(authAdmin)
