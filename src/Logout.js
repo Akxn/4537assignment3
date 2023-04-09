@@ -37,7 +37,7 @@ function Logout({ setUser, accessToken, refreshToken, setAccessToken, setRefresh
 
     async function refreshAccessToken() {
         try {
-            const res = await axios.post("http://localhost:6010/requestNewAccessToken", {}, {
+            const res = await axios.post("https://whateverbackend.onrender.com/requestNewAccessToken", {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                 }
