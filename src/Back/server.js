@@ -10,7 +10,7 @@ require("dotenv").config();
 const userModel = require("../userModel.js")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const logger = require("../logger.js")
+const logger = require("../src/logger.js")
 // const { getChart } = require("./getChart.js")
 
 const {
