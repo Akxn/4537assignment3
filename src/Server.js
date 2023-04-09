@@ -1,16 +1,16 @@
 const mongoose = require("mongoose")
 const express = require("express")
-const { connectDB } = require("./connectDB.js")
-const { getTypes } = require("./getTypes.js")
-const { handleErr } = require("./errorHandler.js")
+const { connectDB } = require("../connectDB.js")
+const { getTypes } = require("../getTypes.js")
+const { handleErr } = require("../errorHandler.js")
 const morgan = require("morgan")
 const cors = require("cors")
-const { asyncWrapper } = require("./asyncWrapper.js")
+const { asyncWrapper } = require("../asyncWrapper.js")
 require("dotenv").config();
-const userModel = require("./userModel.js")
+const userModel = require("../userModel.js")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const logger = require("./logger.js")
+const logger = require("../logger.js")
 // const { getChart } = require("./getChart.js")
 
 
@@ -23,9 +23,9 @@ const {
   PokemonDuplicateError,
   PokemonNoSuchRouteError,
   PokemonAuthError
-} = require("./errors.js")
-const { populate } = require("./userModel.js")
-const { populatePokemons } = require("./populatePokemons.js")
+} = require("../errors.js")
+const { populate } = require("../userModel.js")
+const { populatePokemons } = require("../populatePokemons.js")
 
 const app = express()
 var pokeModel = null;
