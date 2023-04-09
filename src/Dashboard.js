@@ -43,6 +43,14 @@ function Dashboard({ user, setUser, accessToken, setAccessToken, refreshToken, s
                         <h2>Report 3 - Top users for each Endpoint</h2>
                         <Report id={3} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />
                     </div>
+                    <div>
+                        <h2>Report 4 - 4xx Errors By Endpoint</h2>
+                        <Report id={4} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />
+                    </div>
+                    <div>
+                        <h2>Report 5 - Recent 4xx/5xx Errors</h2>
+                        <Report id={5} accessToken={accessToken} setAccessToken={setAccessToken} refreshToken={refreshToken} />
+                    </div>
                     <div></div>
 
                 </div>)
