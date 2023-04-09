@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import jwt_decode from "jwt-decode"
 import { useState } from 'react'
-// import PokemonBox from './PokemonBox'
+import PokemonBox from './PokemonBox'
 const axiosJWT = axios.create()
 
 function FilteredPokemons(
-    { accessToken, refreshToken, setAccessToken, setRefreshToken, searchQuery, typeSelectedArray, 
+    { accessToken, refreshToken, setAccessToken, setRefreshToken, searchQuery, typeSelectedArray,
         pokemons, setPokemons, filteredPokemons, setFilteredPokemons, setCount, pageNumber }) {
-    
+
     const [showModal, setShowModal] = useState(false);
     const [selectedPokemon, setSelectedPokemon] = useState(null);
     const axiosJWT = axios.create()
@@ -47,17 +47,17 @@ function FilteredPokemons(
 
     useEffect(() => {
         async function fetchPokemons() {
-            try{
+            try {
                 console.log(accessToken);
                 const res = await axiosJWT.get('http://localhost:6010/api/v1/pokemons', {
                     headers: {
                         'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                     }
                 })
-                if(res.data.length !== 0){
+                if (res.data.length !== 0) {
                     setPokemons(res.data)
                 }
-            }catch(err){
+            } catch (err) {
                 console.log(err);
             }
         }
@@ -69,39 +69,48 @@ function FilteredPokemons(
     console.log(filtered);
 
     useEffect(() => {
-    filtered = pokemons.filter(pokemon =>
-        pokemon.name.english.toLowerCase().includes(searchQuery)
-    );
+        filtered = pokemons.filter(pokemon =>
+            pokemon.name.english.toLowerCase().includes(searchQuery)
+        );
 
-    filtered = filtered.filter(pokemon => 
-        typeSelectedArray.every(type => pokemon.type.includes(type))
-    )
+        filtered = filtered.filter(pokemon =>
+            typeSelectedArray.every(type => pokemon.type.includes(type))
+        )
 
-    setCount(filtered.length);
+        setCount(filtered.length);
 
-    const pokemonsPerPage = 10;
-    const startIndex = (pageNumber - 1) * pokemonsPerPage;
-    const endIndex = startIndex + pokemonsPerPage;
+        const pokemonsPerPage = 10;
+        const startIndex = (pageNumber - 1) * pokemonsPerPage;
+        const endIndex = startIndex + pokemonsPerPage;
 
-    setFilteredPokemons(filtered.slice(startIndex, endIndex));
+        setFilteredPokemons(filtered.slice(startIndex, endIndex));
     }, [searchQuery, pokemons, pageNumber, typeSelectedArray])
 
+    const handlePokemonClick = (pokemon) => {
+        setSelectedPokemon(pokemon);
+        setShowModal(true);
+    };
 
     return (
         <div className='pokemon-grid'>
             {
                 filteredPokemons.map(pokemon => {
                     // if(typeSelectedArray.every(type => pokemon.type.includes(type))){
-                        var id = '00' + pokemon.id;
-                        id = id.slice(-3);
+                    var id = '00' + pokemon.id;
+                    id = id.slice(-3);
 
-                        return <div key={pokemon.id} className="pokemon-list">
-                            <img key={id} className="pokemon-image" src={`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`} alt={pokemon.name.english} />
-                            <span key={pokemon.name.english}>{pokemon.name.english}</span>
-                            </div>
+                    return <div key={pokemon.id} className="pokemon-list" onClick={() => handlePokemonClick(pokemon)}>
+                        <img key={id} className="pokemon-image" src={`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`} alt={pokemon.name.english} />
+                        <span key={pokemon.name.english}>{pokemon.name.english}</span>
+                    </div>
                     // }
                 })
             }
+            <PokemonBox
+                showModal={showModal}
+                setShowModal={setShowModal}
+                pokemon={selectedPokemon}
+            />
         </div>
     )
 }
