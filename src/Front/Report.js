@@ -194,7 +194,7 @@ function Report({ id, accessToken, setAccessToken, refreshToken }) {
         const start = async () => {
             try {
                 console.log(accessToken);
-                const res = await axiosJWT.get(`https://whatever404.onrender.com/report?id=${id}`, {
+                const res = await axiosJWT.get(`https://whateverbackend.onrender.com/report?id=${id}`, {
                     headers: {
                         'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                     }
@@ -213,7 +213,7 @@ function Report({ id, accessToken, setAccessToken, refreshToken }) {
     const refreshAccessToken = async () => {
         try {
             const res = await axios.post(
-                `https://whatever404.onrender.com/requestNewAccessToken`,
+                `https://whateverbackend.onrender.com/requestNewAccessToken`,
                 {},
                 {
                     headers: {
