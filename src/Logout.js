@@ -37,7 +37,7 @@ function Logout({ setUser, accessToken, refreshToken, setAccessToken, setRefresh
 
     async function refreshAccessToken() {
         try {
-            const res = await axios.post("https://whatever404.onrender.com/requestNewAccessToken", {}, {
+            const res = await axios.post("http://localhost:6010/requestNewAccessToken", {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                 }
@@ -55,7 +55,7 @@ function Logout({ setUser, accessToken, refreshToken, setAccessToken, setRefresh
     async function handleLogout() {
         setLoading(true);
         try {
-            const res = await axiosJWT.post('https://whatever404.onrender.com/logout', {}, {
+            const res = await axiosJWT.post('https://whateverbackend.onrender.com/logout', {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                 }

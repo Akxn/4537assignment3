@@ -34,7 +34,7 @@ const PORT = 6010;
 const start = asyncWrapper(async () => {
   await connectDB({ "drop": false });
   const pokeSchema = await getTypes();
-  populatePokemons(pokeSchema);
+  // populatePokemons(pokeSchema);
   pokeModel = mongoose.model('pokemons', pokeSchema);
 
   app.listen(PORT, async (err) => {

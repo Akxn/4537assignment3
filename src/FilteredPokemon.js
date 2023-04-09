@@ -49,14 +49,13 @@ function FilteredPokemons(
         async function fetchPokemons() {
             try {
                 console.log(accessToken);
-                const res = await axiosJWT.get('https://whateverbackend.onrender.com/pokemons', {
+                const res = await axiosJWT.get('https://whateverbackend.onrender.com/api/v1/pokemons', {
                     headers: {
                         'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                     }
                 })
-                if (res.data.length !== 0) {
                     setPokemons(res.data)
-                }
+                    console.log(res.data);
             } catch (err) {
                 console.log(err);
             }
