@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import Search from './search';
 import Pagination from './Pagination';
-import FilteredPokemons from './FilteredPokemon';
+import FilteredPokemons from './Front/FilteredPokemon';
 import Logout from './Logout';
 
 function useSearchPage(props) {
