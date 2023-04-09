@@ -1,7 +1,7 @@
 import { Link, Routes, Route } from "react-router-dom";
 import { Suspense, useMemo } from "react";
 import SearchPage from './SearchPage';
-import Dashboard from './Front/Dashboard';
+import Dashboard from './Dashboard';
 import Logout from './Logout';
 
 function Navbar(props) {
