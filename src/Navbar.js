@@ -40,6 +40,7 @@ function Navbar(props) {
                     <Route path="/" element={<SearchPage {...routeProps} />} />
                     <Route path="/search" element={<SearchPage {...routeProps} />} />
                     <Route path="/dashboard" element={<Dashboard {...routeProps} />} />
+                    <Route path="/logout" element={<Logout {...routeProps} />} />
                 </Routes>
             </Suspense>
         </>
