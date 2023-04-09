@@ -12,7 +12,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:6010/login", { username, password });
+            const res = await axios.post("https://whatever404.onrender.com/login", { username, password });
             setUser(res.data.user);
             console.log(res.headers);
             const auth = res.headers['authorization'];

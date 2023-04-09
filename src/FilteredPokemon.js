@@ -30,7 +30,7 @@ function FilteredPokemons(
 
     const refreshAccessToken = async () => {
         try {
-            const res = await axios.post("http://localhost:6010/requestNewAccessToken", {}, {
+            const res = await axios.post("https://whatever404.onrender.com/requestNewAccessToken", {}, {
                 headers: {
                     'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                 }
@@ -49,7 +49,7 @@ function FilteredPokemons(
         async function fetchPokemons() {
             try {
                 console.log(accessToken);
-                const res = await axiosJWT.get('http://localhost:6010/api/v1/pokemons', {
+                const res = await axiosJWT.get('https://whatever404.onrender.com/pokemons', {
                     headers: {
                         'Authorization': `Bearer ${accessToken} Refresh ${refreshToken}`
                     }
